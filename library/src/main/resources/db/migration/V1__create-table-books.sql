@@ -1,0 +1,10 @@
+CREATE TABLE books (
+    id_book SERIAL PRIMARY KEY UNIQUE NOT NULL,
+    title TEXT NOT NULL,
+    autor TEXT NOT NULL 
+);
+
+CREATE TABLE genres (
+    id_genre SERIAL PRIMARY KEY UNIQUE NOT NULL,
+    name TEXT NOT NULL
+);
