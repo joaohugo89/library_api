@@ -16,9 +16,9 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.library.library.books.Book;
 import com.example.library.library.books.Chapter;
 import com.example.library.library.books.request.BookRequestDTO;
-import com.example.library.library.books.request.BookWithChapterDTO;
 import com.example.library.library.books.request.ChapterRequestDTO;
 import com.example.library.library.books.response.BookResponseDTO;
+import com.example.library.library.books.response.BookWithChaptersResponseDTO;
 import com.example.library.library.books.response.ChapterResponseDTO;
 import com.example.library.library.genres.Genre;
 import com.example.library.repositories.BookRepository;
@@ -32,6 +32,12 @@ public class BookController {
     @Autowired
     private BookRepository book_repository;
 
+    @Autowired
+    private ChapterRepository chapter_repository;
+
+    @Autowired
+    private GroupGenreRepository groupGenre_repository;
+
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("books")
     public void saveBook(@RequestBody BookRequestDTO data){
@@ -43,23 +49,22 @@ public class BookController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("books")
     public List<BookResponseDTO> getAllBooks() {
-            List<BookResponseDTO> bookList = book_repository.findAll().stream().map(BookResponseDTO::new).toList();
-            return bookList;
+        List<BookResponseDTO> bookList = book_repository.findAll().stream().map(BookResponseDTO::new).toList();
+        return bookList;
     }
 
- 
-    
+    @GetMapping("books-with-chapters")
+    public List<BookWithChaptersResponseDTO> getAllBooksWithChapters() {
+        List<BookWithChaptersResponseDTO> books = book_repository.findAllWithChapters().stream().map(BookWithChaptersResponseDTO::new).toList();
 
-    @Autowired
-    private GroupGenreRepository groupGenre_repository;
+        // Mapear os livros para o DTO, sem necessidade de buscar capítulos separadamente
+        return books;
+    }
 
     @GetMapping("books/{bookId}/genres/")
     public List<Genre> getGenresByBook(@PathVariable Long bookId) {
         return groupGenre_repository.findGenresByBook(bookId);
     }
-
-    @Autowired
-    private ChapterRepository chapter_repository;
 
     @PostMapping("books/{bookId}/chapters/")
     public void saveChapter(@RequestBody ChapterRequestDTO data, @PathVariable Long bookId) {
