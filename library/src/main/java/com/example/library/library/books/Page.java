@@ -1,40 +1,49 @@
 package com.example.library.library.books;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Table(name = "pages")
 @Entity(name = "pages")
 @Getter
-@Setter
-@NoArgsConstructor
+@EqualsAndHashCode
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id_page")
 public class Page {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_page;
+
+    @EmbeddedId
+    private PageId id;
 
     @ManyToOne
+    @MapsId("id_chapter")  // Maps the idChapter field in the composite key
     @JoinColumn(name = "id_chapter", nullable = false)
     private Chapter chapter;
 
     @ManyToOne
+    @MapsId("id_book")  // Maps the idBook field in the composite key
     @JoinColumn(name = "id_book", nullable = false)
     private Book book;
 
-    private Integer page_number;
-
     @Column(columnDefinition = "TEXT")
     private String content;
+
+    public Page() {}
+
+    public Page(Chapter chapter, Book book, Integer page_number, String content) {
+        this.id = new PageId(chapter.getId_chapter(), book.getId_book(), page_number);
+        this.chapter = chapter;
+        this.book = book;
+        this.content = content;
+    }
+
+    public Integer getPageNumber() {
+        return id.getPage_number();
+    }
 }

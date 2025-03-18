@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.library.library.books.Book;
@@ -22,11 +23,10 @@ import com.example.library.library.books.response.BookResponseDTO;
 import com.example.library.library.books.response.BookWithChaptersResponseDTO;
 import com.example.library.library.books.response.ChapterResponseDTO;
 import com.example.library.library.genres.Genre;
+
 import com.example.library.repositories.BookRepository;
 import com.example.library.repositories.ChapterRepository;
 import com.example.library.repositories.GroupGenreRepository;
-import org.springframework.web.bind.annotation.PutMapping;
-
 
 @RestController
 @CrossOrigin
@@ -71,7 +71,6 @@ public class BookController {
     @GetMapping("books-with-chapters")
     public List<BookWithChaptersResponseDTO> getAllBooksWithChapters() {
         List<BookWithChaptersResponseDTO> books = book_repository.findAllWithChapters().stream().map(BookWithChaptersResponseDTO::new).toList();
-
         // Mapear os livros para o DTO, sem necessidade de buscar capítulos separadamente
         return books;
     }
