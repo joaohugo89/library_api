@@ -1,11 +1,15 @@
 package com.example.library.library.genres;
 
+import java.util.Set;
+
 import com.example.library.library.genres.request.GenreRequestDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -22,6 +26,9 @@ public class Genre {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_genre;
     private String name;
+
+    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<GroupGenre> groupGenres;
 
     public Genre(GenreRequestDTO data){
         this.name = data.name();
