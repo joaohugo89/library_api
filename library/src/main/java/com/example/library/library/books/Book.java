@@ -1,9 +1,12 @@
 package com.example.library.library.books;
 
 import java.util.List;
+import java.util.Set;
 
 import com.example.library.library.books.request.BookRequestDTO;
+import com.example.library.library.genres.GroupGenre;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -28,7 +31,10 @@ public class Book {
     private String title;
     private String autor;
 
-    @OneToMany(mappedBy = "book" , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<GroupGenre> groupGenres;
+
+    @OneToMany(mappedBy = "book" , fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Chapter> chapters;
 
     public Book(BookRequestDTO data){
