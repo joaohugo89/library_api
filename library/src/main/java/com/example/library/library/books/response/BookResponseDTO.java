@@ -4,9 +4,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.example.library.library.books.Book;
-import com.example.library.library.genres.GroupGenre;
 
-public record BookResponseDTO(Long id_book, String title, String autor, Set<String> genres) {
+public record BookResponseDTO(Long id_book, String title, String autor, Set<String> genres, Set<String> chapters) {
     public BookResponseDTO (Book book){
         this(book.getId_book(), 
             book.getTitle(), 
@@ -14,6 +13,11 @@ public record BookResponseDTO(Long id_book, String title, String autor, Set<Stri
             book.getGroupGenres().stream()
                                 .map(groupGenre -> groupGenre
                                 .getGenre()
-                                .getName()).collect(Collectors.toSet()));
+                                .getName()).collect(Collectors.toSet()),
+            book.getChapters().stream()
+                                .map(chapter -> chapter
+                                .getTitle())
+                                .collect(Collectors.toSet()));
+                                
     }
 }
