@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.library.library.mangas.Manga;
 import com.example.library.library.mangas.request.MangaRequestDTO;
 import com.example.library.library.mangas.response.MangaResponseDTO;
 import com.example.library.repositories.MangaRepository;
 
+@RestController
+@CrossOrigin
+@RequestMapping("library")
 public class MangaController {
     @Autowired
     private MangaRepository manga_repository;
