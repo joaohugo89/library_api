@@ -39,6 +39,9 @@ public class Book {
     @OneToMany(mappedBy = "book" , fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Chapter> chapters;
 
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Page> pages;
+
     public Book(BookRequestDTO data){
         this.title = data.title();
         this.autor = data.autor();

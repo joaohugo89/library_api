@@ -1,5 +1,7 @@
 package com.example.library.library.books;
 
+import com.example.library.library.books.request.PageRequestDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -36,11 +38,11 @@ public class Page {
 
     public Page() {}
 
-    public Page(Chapter chapter, Book book, Integer page_number, String content) {
-        this.id = new PageId(chapter.getId_chapter(), book.getId_book(), page_number);
+    public Page(PageRequestDTO data, Chapter chapter, Book book){
+        this.id = new PageId(chapter.getId_chapter(), book.getId_book(), data.page_number());
         this.chapter = chapter;
         this.book = book;
-        this.content = content;
+        this.content = data.content();
     }
 
     public Integer getPageNumber() {

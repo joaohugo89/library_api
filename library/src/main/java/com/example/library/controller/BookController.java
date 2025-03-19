@@ -17,8 +17,10 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.library.library.books.Book;
 import com.example.library.library.books.Chapter;
+import com.example.library.library.books.Page;
 import com.example.library.library.books.request.BookRequestDTO;
 import com.example.library.library.books.request.ChapterRequestDTO;
+import com.example.library.library.books.request.PageRequestDTO;
 import com.example.library.library.books.response.BookResponseDTO;
 import com.example.library.library.books.response.BookWithChaptersResponseDTO;
 import com.example.library.library.books.response.ChapterResponseDTO;
@@ -27,6 +29,7 @@ import com.example.library.library.genres.Genre;
 import com.example.library.repositories.BookRepository;
 import com.example.library.repositories.ChapterRepository;
 import com.example.library.repositories.GroupGenreRepository;
+import com.example.library.repositories.PageRepository;
 
 @RestController
 @CrossOrigin
@@ -41,6 +44,10 @@ public class BookController {
     @Autowired
     private GroupGenreRepository groupGenre_repository;
 
+    @Autowired
+    private PageRepository page_repository;
+    
+    //All Post Methods
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("books")
     public void saveBook(@RequestBody BookRequestDTO data){
@@ -61,6 +68,23 @@ public class BookController {
         return;
     }
 
+    @PostMapping("books/{bookId}/chapters/{chapterId}/pages/")
+    public void savePage(@RequestBody PageRequestDTO data, @PathVariable Long bookId, @PathVariable Long chapterId) {
+        // Buscar o livro no banco de dados
+        Book book = book_repository.findById(bookId)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro não encontrado"));
+
+        // Buscar o capítulo no banco de dados
+        Chapter chapter = chapter_repository.findById(chapterId)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Capítulo não encontrado"));
+
+        // Criar a página com o objeto Book e Chapter corretos
+        Page newPage = new Page(data, chapter, book);
+        page_repository.save(newPage);
+        return;
+    }
+
+    //All Get Methods
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("books")
     public List<BookResponseDTO> getAllBooks() {
@@ -86,12 +110,14 @@ public class BookController {
         return chapterList;
     }
 
+    //All Delete Methods
     @DeleteMapping("books/{bookId}")
     public void deleteBook(@PathVariable Long bookId) {
         book_repository.deleteById(bookId); //Automaticated created method by Spring
         return;
     }
 
+    //All Put Methods
     @PutMapping("books/{id}")
     public void updateBook(@RequestBody BookRequestDTO data, @PathVariable Long id) {
         Book book = book_repository.findById(id)
