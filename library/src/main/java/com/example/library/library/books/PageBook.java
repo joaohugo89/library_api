@@ -18,15 +18,15 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode
 @AllArgsConstructor
-public class Page {
+public class PageBook {
 
     @EmbeddedId
-    private PageId id;
+    private PageBookId id;
 
     @ManyToOne
     @MapsId("id_chapter")  // Maps the idChapter field in the composite key
     @JoinColumn(name = "id_chapter", nullable = false)
-    private Chapter chapter;
+    private ChapterBook chapter;
 
     @ManyToOne
     @MapsId("id_book")  // Maps the idBook field in the composite key
@@ -36,10 +36,10 @@ public class Page {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    public Page() {}
+    public PageBook() {}
 
-    public Page(PageRequestDTO data, Chapter chapter, Book book){
-        this.id = new PageId(chapter.getId_chapter(), book.getId_book(), data.page_number());
+    public PageBook(PageRequestDTO data, ChapterBook chapter, Book book){
+        this.id = new PageBookId(chapter.getId_chapter(), book.getId_book(), data.page_number());
         this.chapter = chapter;
         this.book = book;
         this.content = data.content();

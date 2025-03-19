@@ -37,10 +37,10 @@ public class Book {
     private Set<GroupGenreBook> groupGenres;
 
     @OneToMany(mappedBy = "book" , fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Chapter> chapters;
+    private List<ChapterBook> chapters;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Page> pages;
+    private List<PageBook> pages;
 
     public Book(BookRequestDTO data){
         this.title = data.title();

@@ -7,15 +7,15 @@ import lombok.Getter;
 
 @Embeddable
 @Getter
-public class PageId implements Serializable {
+public class PageBookId implements Serializable {
 
     private Long id_chapter;
     private Long id_book;
     private Integer page_number;
 
-    public PageId() {}
+    public PageBookId() {}
 
-    public PageId(Long id_chapter, Long id_book, Integer page_number){
+    public PageBookId(Long id_chapter, Long id_book, Integer page_number){
         this.id_chapter = id_chapter;
         this.id_book = id_book;
         this.page_number = page_number;

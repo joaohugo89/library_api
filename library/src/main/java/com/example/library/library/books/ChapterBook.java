@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id_chapter")
-public class Chapter {
+public class ChapterBook {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_chapter;
 
@@ -36,9 +36,9 @@ public class Chapter {
     private Integer chapter_number;
 
     @OneToMany(mappedBy = "chapter", fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Page> pages;
+    private List<PageBook> pages;
 
-    public Chapter(ChapterRequestDTO data, Book book){
+    public ChapterBook(ChapterRequestDTO data, Book book){
         this.book = book;
         this.title = data.title();
         this.chapter_number = data.chapter_number();

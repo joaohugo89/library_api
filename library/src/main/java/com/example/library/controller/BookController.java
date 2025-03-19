@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.library.library.books.Book;
-import com.example.library.library.books.Chapter;
-import com.example.library.library.books.Page;
+import com.example.library.library.books.ChapterBook;
+import com.example.library.library.books.PageBook;
 import com.example.library.library.books.request.BookRequestDTO;
 import com.example.library.library.books.request.ChapterRequestDTO;
 import com.example.library.library.books.request.PageRequestDTO;
@@ -27,9 +27,9 @@ import com.example.library.library.books.response.ChapterResponseDTO;
 import com.example.library.library.genres.Genre;
 
 import com.example.library.repositories.BookRepository;
-import com.example.library.repositories.ChapterRepository;
+import com.example.library.repositories.ChapterBookRepository;
 import com.example.library.repositories.GroupGenreBookRepository;
-import com.example.library.repositories.PageRepository;
+import com.example.library.repositories.PageBookRepository;
 
 @RestController
 @CrossOrigin
@@ -39,13 +39,13 @@ public class BookController {
     private BookRepository book_repository;
 
     @Autowired
-    private ChapterRepository chapter_repository;
+    private ChapterBookRepository chapter_repository;
 
     @Autowired
     private GroupGenreBookRepository groupGenre_repository;
 
     @Autowired
-    private PageRepository page_repository;
+    private PageBookRepository page_repository;
     
     //All Post Methods
 
@@ -67,7 +67,7 @@ public class BookController {
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro não encontrado"));
 
         // Criar o capítulo com o objeto Book correto
-        Chapter newChapter = new Chapter(data, book);
+        ChapterBook newChapter = new ChapterBook(data, book);
         chapter_repository.save(newChapter);
         return;
     }
@@ -81,11 +81,11 @@ public class BookController {
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro não encontrado"));
 
         // Buscar o capítulo no banco de dados
-        Chapter chapter = chapter_repository.findById(chapterId)
+        ChapterBook chapter = chapter_repository.findById(chapterId)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Capítulo não encontrado"));
 
         // Criar a página com o objeto Book e Chapter corretos
-        Page newPage = new Page(data, chapter, book);
+        PageBook newPage = new PageBook(data, chapter, book);
         page_repository.save(newPage);
         return;
     }
