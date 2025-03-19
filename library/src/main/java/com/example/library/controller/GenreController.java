@@ -53,6 +53,9 @@ public class GenreController {
     @Autowired
     private BookRepository book_repository;
 
+    //All post methods
+
+    //Save group genre
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("group_genres")
     public void saveGroupGenre(@RequestBody GroupGenreRequestDTO data) {
@@ -66,19 +69,25 @@ public class GenreController {
         groupGenre_repository.save(groupGenre);
     }
 
+    //All get methods
 
+    //Get all group genres
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("group_genres")
     public List<GroupGenreBookResponseDTO> getAllGroupGenres() {
         List<GroupGenreBookResponseDTO> groupGenreList= groupGenre_repository.findAll().stream().map(GroupGenreBookResponseDTO::new).toList();
         return groupGenreList;
     }
 
+    //Get all books by genre
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/books-by-genre/{genreId}")
     public List<BookResponseDTO> getBooksByGenre(@PathVariable Long genreId) {
         List<BookResponseDTO> books = groupGenre_repository.findBooksByGenre(genreId).stream().map(BookResponseDTO::new).toList();
         return books;
     }
 
+    //All delete methods
     @DeleteMapping("group_genres/{id}")
     public void deleteGroupGenre(@PathVariable Long id) {
         genre_repository.deleteById(id);
