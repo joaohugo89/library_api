@@ -3,6 +3,7 @@ package com.example.library.library.mangas;
 import java.util.Set;
 
 import com.example.library.library.genres.GroupGenreManga;
+import com.example.library.library.mangas.request.MangaRequestDTO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -33,5 +34,10 @@ public class Manga {
 
     @OneToMany(mappedBy = "manga", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<GroupGenreManga> groupGenresManga;
+
+    public Manga(MangaRequestDTO data) {
+        this.title = data.title();
+        this.autor = data.autor();
+    }
 
 }
