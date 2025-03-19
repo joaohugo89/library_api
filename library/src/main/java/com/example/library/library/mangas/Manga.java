@@ -1,8 +1,8 @@
-package com.example.library.library.genres;
+package com.example.library.library.mangas;
 
 import java.util.Set;
 
-import com.example.library.library.genres.request.GenreRequestDTO;
+import com.example.library.library.genres.GroupGenreManga;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -15,22 +15,23 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Table(name = "genres")
-@Entity(name = "genres")
+
+@Table(name = "mangas")
+@Entity(name = "mangas")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id_genre")
-public class Genre {
+@EqualsAndHashCode(of = "id_manga")
+public class Manga {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_genre;
-    private String name;
+    private Long id_manga;
+    private String title;
+    private String autor;
 
-    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<GroupGenreBook> groupGenres;
+    @OneToMany(mappedBy = "manga", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<GroupGenreManga> groupGenresManga;
 
-    public Genre(GenreRequestDTO data){
-        this.name = data.name();
-    }
 }

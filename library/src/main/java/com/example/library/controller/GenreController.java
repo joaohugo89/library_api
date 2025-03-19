@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.library.library.books.Book;
 import com.example.library.library.books.response.BookResponseDTO;
 import com.example.library.library.genres.Genre;
-import com.example.library.library.genres.GroupGenre;
+import com.example.library.library.genres.GroupGenreBook;
 import com.example.library.library.genres.request.GenreRequestDTO;
 import com.example.library.library.genres.request.GroupGenreRequestDTO;
 import com.example.library.library.genres.response.GenreResponseDTO;
-import com.example.library.library.genres.response.GroupGenreResponseDTO;
+import com.example.library.library.genres.response.GroupGenreBookResponseDTO;
 import com.example.library.repositories.BookRepository;
 import com.example.library.repositories.GenreRepository;
-import com.example.library.repositories.GroupGenreRepository;
+import com.example.library.repositories.GroupGenreBookRepository;
 
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class GenreController {
     }
 
     @Autowired
-    private GroupGenreRepository groupGenre_repository;
+    private GroupGenreBookRepository groupGenre_repository;
 
     @Autowired
     private BookRepository book_repository;
@@ -62,14 +62,14 @@ public class GenreController {
         Genre genre = genre_repository.findById(data.id_genre())
                 .orElseThrow(() -> new RuntimeException("Genre not found"));
 
-        GroupGenre groupGenre = new GroupGenre(book, genre);
+        GroupGenreBook groupGenre = new GroupGenreBook(book, genre);
         groupGenre_repository.save(groupGenre);
     }
 
 
     @GetMapping("group_genres")
-    public List<GroupGenreResponseDTO> getAllGroupGenres() {
-        List<GroupGenreResponseDTO> groupGenreList= groupGenre_repository.findAll().stream().map(GroupGenreResponseDTO::new).toList();
+    public List<GroupGenreBookResponseDTO> getAllGroupGenres() {
+        List<GroupGenreBookResponseDTO> groupGenreList= groupGenre_repository.findAll().stream().map(GroupGenreBookResponseDTO::new).toList();
         return groupGenreList;
     }
 

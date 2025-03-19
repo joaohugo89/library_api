@@ -28,7 +28,7 @@ import com.example.library.library.genres.Genre;
 
 import com.example.library.repositories.BookRepository;
 import com.example.library.repositories.ChapterRepository;
-import com.example.library.repositories.GroupGenreRepository;
+import com.example.library.repositories.GroupGenreBookRepository;
 import com.example.library.repositories.PageRepository;
 
 @RestController
@@ -42,7 +42,7 @@ public class BookController {
     private ChapterRepository chapter_repository;
 
     @Autowired
-    private GroupGenreRepository groupGenre_repository;
+    private GroupGenreBookRepository groupGenre_repository;
 
     @Autowired
     private PageRepository page_repository;

@@ -13,8 +13,8 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-@Table(name = "pages")
-@Entity(name = "pages")
+@Table(name = "pages_book")
+@Entity(name = "pages_book")
 @Getter
 @EqualsAndHashCode
 @AllArgsConstructor

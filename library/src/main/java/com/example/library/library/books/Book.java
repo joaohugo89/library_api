@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.example.library.library.books.request.BookRequestDTO;
-import com.example.library.library.genres.GroupGenre;
+import com.example.library.library.genres.GroupGenreBook;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -34,7 +34,7 @@ public class Book {
     private String autor;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<GroupGenre> groupGenres;
+    private Set<GroupGenreBook> groupGenres;
 
     @OneToMany(mappedBy = "book" , fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Chapter> chapters;

@@ -18,8 +18,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "chapters")
-@Entity(name = "chapters")
+@Table(name = "chapters_book")
+@Entity(name = "chapters_book")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
