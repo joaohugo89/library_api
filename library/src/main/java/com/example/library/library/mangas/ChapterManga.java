@@ -1,8 +1,8 @@
-package com.example.library.library.books;
+package com.example.library.library.mangas;
 
 import java.util.List;
 
-import com.example.library.library.books.request.ChapterBookRequestDTO;
+import com.example.library.library.mangas.request.ChapterMangaRequestDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,28 +18,28 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "chapters_book")
-@Entity(name = "chapters_book")
+@Table(name = "chapters_manga")
+@Entity(name = "chapters_manga")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id_chapter_book")
-public class ChapterBook {
+@EqualsAndHashCode(of = "id_chapter_manga")
+public class ChapterManga {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_chapter_book;
+    private Long id_chapter_manga;
 
     @ManyToOne
-    @JoinColumn(name = "id_book", nullable = false)
-    private Book book;
+    @JoinColumn(name = "id_manga", nullable = false)
+    private Manga manga;
 
     private String title;
     private Integer chapter_number;
 
     @OneToMany(mappedBy = "chapter", fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<PageBook> pages;
+    private List<PageManga> pages;
 
-    public ChapterBook(ChapterBookRequestDTO data, Book book){
-        this.book = book;
+    public ChapterManga(ChapterMangaRequestDTO data, Manga manga){
+        this.manga = manga;
         this.title = data.title();
         this.chapter_number = data.chapter_number();
     }

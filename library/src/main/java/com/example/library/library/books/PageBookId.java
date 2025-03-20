@@ -9,14 +9,14 @@ import lombok.Getter;
 @Getter
 public class PageBookId implements Serializable {
 
-    private Long id_chapter;
+    private Long id_chapter_book;
     private Long id_book;
     private Integer page_number;
 
     public PageBookId() {}
 
-    public PageBookId(Long id_chapter, Long id_book, Integer page_number){
-        this.id_chapter = id_chapter;
+    public PageBookId(Long id_chapter_book, Long id_book, Integer page_number){
+        this.id_chapter_book = id_chapter_book;
         this.id_book = id_book;
         this.page_number = page_number;
     }

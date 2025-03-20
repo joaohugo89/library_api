@@ -131,7 +131,7 @@ public class GenreController {
 
     //All delete methods
     @DeleteMapping("group_genres_books/{id}")
-    public void deleteGroupGenre(@PathVariable Long id) {
+    public void deleteGenre(@PathVariable Long id) {
         genre_repository.deleteById(id);
     }
 }

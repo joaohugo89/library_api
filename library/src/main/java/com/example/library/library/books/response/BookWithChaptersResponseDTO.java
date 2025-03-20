@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.example.library.library.books.Book;
 
-public record BookWithChaptersResponseDTO(Long id_book, String title, String autor, List<ChapterResponseDTO> chapters) {
+public record BookWithChaptersResponseDTO(Long id_book, String title, String autor, List<ChapterBookResponseDTO> chapters) {
     public BookWithChaptersResponseDTO(Book book) {
-        this(book.getId_book(), book.getTitle(), book.getAutor(), book.getChapters().stream().map(ChapterResponseDTO::new).toList());
+        this(book.getId_book(), book.getTitle(), book.getAutor(), book.getChapters().stream().map(ChapterBookResponseDTO::new).toList());
     }
 }

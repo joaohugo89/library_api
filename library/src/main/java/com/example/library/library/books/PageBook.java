@@ -24,8 +24,8 @@ public class PageBook {
     private PageBookId id;
 
     @ManyToOne
-    @MapsId("id_chapter")  // Maps the idChapter field in the composite key
-    @JoinColumn(name = "id_chapter", nullable = false)
+    @MapsId("id_chapter_book")  // Maps the idChapter field in the composite key
+    @JoinColumn(name = "id_chapter_book", nullable = false)
     private ChapterBook chapter;
 
     @ManyToOne
@@ -39,7 +39,7 @@ public class PageBook {
     public PageBook() {}
 
     public PageBook(PageRequestDTO data, ChapterBook chapter, Book book){
-        this.id = new PageBookId(chapter.getId_chapter(), book.getId_book(), data.page_number());
+        this.id = new PageBookId(chapter.getId_chapter_book(), book.getId_book(), data.page_number());
         this.chapter = chapter;
         this.book = book;
         this.content = data.content();

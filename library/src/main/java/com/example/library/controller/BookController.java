@@ -19,11 +19,11 @@ import com.example.library.library.books.Book;
 import com.example.library.library.books.ChapterBook;
 import com.example.library.library.books.PageBook;
 import com.example.library.library.books.request.BookRequestDTO;
-import com.example.library.library.books.request.ChapterRequestDTO;
+import com.example.library.library.books.request.ChapterBookRequestDTO;
 import com.example.library.library.books.request.PageRequestDTO;
 import com.example.library.library.books.response.BookResponseDTO;
 import com.example.library.library.books.response.BookWithChaptersResponseDTO;
-import com.example.library.library.books.response.ChapterResponseDTO;
+import com.example.library.library.books.response.ChapterBookResponseDTO;
 import com.example.library.library.genres.Genre;
 
 import com.example.library.repositories.BookRepository;
@@ -61,7 +61,7 @@ public class BookController {
     //Save a chapter in a book
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("books/{bookId}/chapters/")
-    public void saveChapter(@RequestBody ChapterRequestDTO data, @PathVariable Long bookId) {
+    public void saveChapter(@RequestBody ChapterBookRequestDTO data, @PathVariable Long bookId) {
         // Buscar o livro no banco de dados
         Book book = book_repository.findById(bookId)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro não encontrado"));
@@ -119,8 +119,8 @@ public class BookController {
     //Return all chapters
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("books/chapters")
-    public List<ChapterResponseDTO> getChaptersByBook() {
-        List<ChapterResponseDTO> chapterList = chapter_repository.findAll().stream().map(ChapterResponseDTO::new).toList();
+    public List<ChapterBookResponseDTO> getChaptersByBook() {
+        List<ChapterBookResponseDTO> chapterList = chapter_repository.findAll().stream().map(ChapterBookResponseDTO::new).toList();
         return chapterList;
     }
 
