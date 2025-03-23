@@ -28,7 +28,10 @@ public class Genre {
     private String name;
 
     @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<GroupGenreBook> groupGenres;
+    private Set<GroupGenreBook> groupGenresBooks;
+
+    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<GroupGenreManga> groupGenresMangas;
 
     public Genre(GenreRequestDTO data){
         this.name = data.name();

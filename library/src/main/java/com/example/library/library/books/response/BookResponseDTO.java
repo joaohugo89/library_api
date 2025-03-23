@@ -12,7 +12,7 @@ public record BookResponseDTO(Long id_book, String title, String autor, Set<Stri
         this(book.getId_book(), 
             book.getTitle(), 
             book.getAutor(), 
-            book.getGroupGenres().stream()
+            book.getGroupGenresBooks().stream()
                                 .map(groupGenre -> groupGenre
                                 .getGenre()
                                 .getName()).collect(Collectors.toSet()),

@@ -34,7 +34,7 @@ public class Book {
     private String autor;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<GroupGenreBook> groupGenres;
+    private Set<GroupGenreBook> groupGenresBooks;
 
     @OneToMany(mappedBy = "book" , fetch = FetchType.LAZY, orphanRemoval = true)
     private List<ChapterBook> chapters;

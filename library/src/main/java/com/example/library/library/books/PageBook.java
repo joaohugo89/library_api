@@ -25,7 +25,7 @@ public class PageBook {
 
     @ManyToOne
     @MapsId("id_chapter_book")  // Maps the idChapter field in the composite key
-    @JoinColumn(name = "id_chapter_book", nullable = false)
+    @JoinColumn(name = "id_chapter", nullable = false)
     private ChapterBook chapter;
 
     @ManyToOne

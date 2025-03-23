@@ -2,6 +2,7 @@ package com.example.library.library.genres;
 
 import com.example.library.library.mangas.Manga;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -18,15 +19,16 @@ import lombok.Getter;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class GroupGenreManga {
+    
     @EmbeddedId
     private GroupGenreMangaId id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("id_manga")  // Maps the idBook field in the composite key
     @JoinColumn(name = "id_manga", nullable = false)
     private Manga manga;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("id_genre")  // Maps the idGenre field in the composite key
     @JoinColumn(name = "id_genre", nullable = false)
     private Genre genre;

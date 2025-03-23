@@ -33,7 +33,7 @@ public class Manga {
     private String autor;
 
     @OneToMany(mappedBy = "manga", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<GroupGenreManga> groupGenresManga;
+    private Set<GroupGenreManga> groupGenresMangas;
 
     public Manga(MangaRequestDTO data) {
         this.title = data.title();
