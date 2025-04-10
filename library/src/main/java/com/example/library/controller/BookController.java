@@ -32,7 +32,6 @@ import com.example.library.repositories.GroupGenreBookRepository;
 import com.example.library.repositories.PageBookRepository;
 
 @RestController
-@CrossOrigin
 @RequestMapping("library")
 public class BookController {
     @Autowired
@@ -50,7 +49,6 @@ public class BookController {
     //All Post Methods
 
     //Save a book
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("books")
     public void saveBook(@RequestBody BookRequestDTO data){
         Book bookData = new Book(data);
@@ -59,7 +57,6 @@ public class BookController {
     }
     
     //Save a chapter in a book
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("books/{bookId}/chapters/")
     public void saveChapter(@RequestBody ChapterBookRequestDTO data, @PathVariable Long bookId) {
         // Buscar o livro no banco de dados
@@ -73,7 +70,6 @@ public class BookController {
     }
 
     //Save a page in a chapter of a book
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("books/{bookId}/chapters/{chapterId}/pages/")
     public void savePage(@RequestBody PageRequestDTO data, @PathVariable Long bookId, @PathVariable Long chapterId) {
         // Buscar o livro no banco de dados
@@ -93,7 +89,6 @@ public class BookController {
     //All Get Methods
 
     //Return all books, with genres and chapters(with pages)
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("books")
     public List<BookResponseDTO> getAllBooks() {
         List<BookResponseDTO> bookList = book_repository.findAllOrderByIdAsc().stream().map(BookResponseDTO::new).toList();
@@ -101,7 +96,6 @@ public class BookController {
     }
 
     //Return all books, with chapters
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("books-with-chapters")
     public List<BookWithChaptersResponseDTO> getAllBooksWithChapters() {
         List<BookWithChaptersResponseDTO> books = book_repository.findAllWithChapters().stream().map(BookWithChaptersResponseDTO::new).toList();
@@ -110,14 +104,12 @@ public class BookController {
     }
 
     //Return all books, with genres
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("books/{bookId}/genres/")
     public List<Genre> getGenresByBook(@PathVariable Long bookId) {
         return groupGenre_repository.findGenresByBook(bookId);
     }
 
     //Return all chapters
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("books/chapters")
     public List<ChapterBookResponseDTO> getChaptersByBook() {
         List<ChapterBookResponseDTO> chapterList = chapter_repository.findAll().stream().map(ChapterBookResponseDTO::new).toList();

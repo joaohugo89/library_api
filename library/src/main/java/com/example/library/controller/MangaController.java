@@ -18,7 +18,6 @@ import com.example.library.library.mangas.response.MangaResponseDTO;
 import com.example.library.repositories.MangaRepository;
 
 @RestController
-@CrossOrigin
 @RequestMapping("library")
 public class MangaController {
     @Autowired
@@ -27,7 +26,6 @@ public class MangaController {
     //All post methods
 
     //Save manga
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("mangas")
     public void saveManga(@RequestBody MangaRequestDTO data){
         Manga mangaData = new Manga(data);

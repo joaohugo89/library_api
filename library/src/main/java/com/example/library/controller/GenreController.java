@@ -34,13 +34,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@CrossOrigin
 @RequestMapping("library")
 public class GenreController {
     @Autowired
     private GenreRepository genre_repository;
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("genres")
     public void saveGenre(@RequestBody GenreRequestDTO data){
         Genre genreData = new Genre(data);
@@ -69,7 +67,6 @@ public class GenreController {
     //All post methods
 
     //Save group genre
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("group_genres_books")
     public void saveGroupGenreBook(@RequestBody GroupGenreBookRequestDTO data) {
         Book book = book_repository.findById(data.id_book())
@@ -82,7 +79,6 @@ public class GenreController {
         groupGenreBook_repository.save(groupGenre);
     }
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("group_genres_mangas")
     public void saveGroupGenreManga(@RequestBody GroupGenreMangaRequestDTO data) {
         Manga manga = manga_repository.findById(data.id_manga())
@@ -98,7 +94,6 @@ public class GenreController {
     //All get methods
 
     //Get all group genres for books
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("group_genres_books")
     public List<GroupGenreBookResponseDTO> getAllGroupGenresBooks() {
         List<GroupGenreBookResponseDTO> groupGenreList= groupGenreBook_repository.findAll().stream().map(GroupGenreBookResponseDTO::new).toList();
@@ -106,7 +101,6 @@ public class GenreController {
     }
 
     //Get all books by genre
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/books-by-genre/{genreId}")
     public List<BookResponseDTO> getBooksByGenre(@PathVariable Long genreId) {
         List<BookResponseDTO> books = groupGenreBook_repository.findBooksByGenre(genreId).stream().map(BookResponseDTO::new).toList();
@@ -114,7 +108,6 @@ public class GenreController {
     }
 
     //Get all group genres for mangas
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("group_genres_mangas")
     public List<GroupGenreMangaResponseDTO> getAllGroupGenresMangas() {
         List<GroupGenreMangaResponseDTO> groupGenreList= groupGenreManga_repository.findAll().stream().map(GroupGenreMangaResponseDTO::new).toList();
@@ -122,7 +115,6 @@ public class GenreController {
     }
 
     //Get all books by genre
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/mangas-by-genre/{genreId}")
     public List<MangaResponseDTO> getMangasByGenre(@PathVariable Long genreId) {
         List<MangaResponseDTO> mangas = groupGenreManga_repository.findMangasByGenre(genreId).stream().map(MangaResponseDTO::new).toList();
